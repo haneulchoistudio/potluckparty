@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from "mongodb";
 import { abc } from "../dotenv";
-import { Event, User } from "~/types";
+import { Event, Menu, User } from "~/types";
 
 const uri = abc("DATABASE_URI");
 
@@ -51,13 +51,18 @@ async function collections() {
   return {
     users: await getCollection<User>("users"),
     events: await getCollection<Event>("events"),
+    menus: await getCollection<Menu>("menus"),
   } as const;
 }
-export async function db<Name extends "users" | "events">(name: Name) {
+export async function db<Name extends "users" | "events" | "menus">(
+  name: Name
+) {
   const collection = await collections();
   const selected = collection[name] as Name extends "users"
     ? Collection<User>
-    : Collection<Event>;
+    : Name extends "events"
+    ? Collection<Event>
+    : Collection<Menu>;
 
   return selected;
 }

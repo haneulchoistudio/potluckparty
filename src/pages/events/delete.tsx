@@ -31,7 +31,7 @@ export default function EventDelete({ user, event }: Props) {
   }
 
   return (
-    <div className="p-8 h-screen flex flex-col justify-center items-center">
+    <div className="px-8 py-5 lg:py-6 h-screen flex flex-col justify-center items-center">
       <article className="max-w-[500px] mx-auto flex flex-col items-center gap-y-2.5 lg:gap-y-3.5">
         <h3 className="text-lg lg:text-xl text-neutral-600">
           Are you sure you want to delete?

@@ -137,8 +137,6 @@ export default function Home({ user }: Props) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const user = await getSession(ctx);
 
-  console.log("___USER___", user);
-
   return {
     props: {
       user,

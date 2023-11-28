@@ -2,6 +2,7 @@ import { Session } from "next-auth";
 import { abc } from "~/server/dotenv";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import { db } from "~/server/mongo";
 import { ObjectId } from "mongodb";
 import { User } from "~/types";
@@ -12,6 +13,10 @@ const nextAuthOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: abc("NEXT_PUBLIC_GOOGLE_CLIENT_ID"),
       clientSecret: abc("NEXT_PUBLIC_GOOGLE_CLIENT_SECRET"),
+    }),
+    FacebookProvider({
+      clientId: "",
+      clientSecret: "",
     }),
   ],
   session: {

@@ -11,6 +11,7 @@ import {
   FiUploadCloud,
 } from "react-icons/fi";
 import { twMerge } from "tailwind-merge";
+import ProfileImage from "./ProfileImage";
 
 interface ProfileMenuProps {
   image: string;
@@ -23,16 +24,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ image, isOnFreePlan }) => {
   return (
     <div className="relative z-20">
       <button type="button" onClick={() => setOpenMenu(!openMenu)}>
-        <picture
-          className={twMerge(
-            "block w-[37.5px] h-[37.5px] rounded-full overflow-hidden border transition-all duration-[0.35s] ease-in-out cursor-pointer ",
-            openMenu
-              ? "ring ring-emerald-500"
-              : "lg:hover:ring lg:hover:ring-emerald-500"
-          )}
-        >
-          <img src={image} alt="Profile Image" referrerPolicy="no-referrer" />
-        </picture>
+        <ProfileImage image={image} asModal={openMenu} />
       </button>
       {openMenu && (
         <aside className="px-2 py-3 rounded border shadow-xl absolute z-10 top-12 bg-white right-0">

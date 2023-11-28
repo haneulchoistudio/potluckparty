@@ -44,6 +44,7 @@ export interface MenuItemProps {
 }
 
 export interface MenuProps {
+  event: string;
   appetizers: MenuItemProps[];
   mains: MenuItemProps[];
   desserts: MenuItemProps[];
