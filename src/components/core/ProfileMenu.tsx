@@ -32,7 +32,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ image, isOnFreePlan }) => {
             {isOnFreePlan && (
               <Link
                 href={"/account/subscription/plan"}
-                className="text-sm px-3 py-2 rounded-full flex items-center justify-between w-full text-emerald-500 lg:hover:text-emerald-700 font-medium"
+                className="text-base lg:text-lg px-3 py-2 rounded-full flex items-center justify-between w-full text-emerald-500 lg:hover:text-emerald-700 font-medium"
               >
                 <span>Upgrade</span>
                 <FiHash />
@@ -40,19 +40,19 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ image, isOnFreePlan }) => {
             )}
             <Link
               href={"/account/profile"}
-              className="px-3 py-0.5 lg:hover:text-neutral-500"
+              className="px-3 py-0.5 text-neutral-600 lg:hover:text-neutral-400"
             >
               Profile
             </Link>
             <Link
               href={"/account/subscription"}
-              className="px-3 py-0.5 lg:hover:text-neutral-500"
+              className="px-3 py-0.5 text-neutral-600 lg:hover:text-neutral-400"
             >
               Subscription
             </Link>
             <Link
               href={"/account/verification"}
-              className="px-3 py-0.5 lg:hover:text-neutral-500"
+              className="px-3 py-0.5 text-neutral-600 lg:hover:text-neutral-400"
             >
               Verifications
             </Link>

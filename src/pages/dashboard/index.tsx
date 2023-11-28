@@ -26,12 +26,12 @@ export default function Dashboard({ user, events, inbox }: Props) {
         <h1 className="font-bold text-xl lg:text-2xl uppercase tracking-[0.1rem]">
           Dashboard
         </h1>
-        <nav className="flex items-center gap-x-2.5 md:w-full md:justify-between">
+        <nav className="flex items-center gap-x-3.5 md:w-full md:justify-between">
           <Link
             href={"/events/create"}
-            className="flex items-center gap-x-1.5 text-emerald-500 lg:hover:text-emerald-700 font-medium"
+            className="text-neutral-700 lg:hover:text-neutral-500 lg:hover:underline lg:text-lg flex items-center gap-x-1.5"
           >
-            <span> Create New</span>
+            <span> Create Event</span>
             <FiPlus />
           </Link>
           <ProfileMenu

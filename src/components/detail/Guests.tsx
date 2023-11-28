@@ -156,7 +156,7 @@ const Guests: React.FC<GuestsProps> = ({ guests, emails: es, _id }) => {
       ) : (
         <>
           {guests.length >= 1 ? (
-            <ul>
+            <ul className="w-full grid grid-cols-12">
               {guests.map((guest, idx) => (
                 <ProfileImage image={guest.data.image} key={idx} />
               ))}

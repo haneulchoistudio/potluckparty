@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { PiSignOutFill } from "react-icons/pi";
 import {
   FiArrowLeft,
   FiCalendar,
@@ -39,13 +40,34 @@ export default function EventDetail({
 
   const [isHost, setIsHost] = useState<boolean>(user._id === event.data.host);
 
+  async function leave() {
+    if (!isHost) {
+      const confirmLeave = confirm(
+        `Are you sure you want to leave ${event.data.name}?`
+      );
+
+      const response = await fetch("/api/events/leave", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ _id: event._id, userId: user._id }),
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      await router.push("/dashboard");
+      return;
+    }
+  }
+
   return (
     <div className="grid lg:grid-cols-12 relative">
       <header className="lg:col-span-12 flex justify-between md:justify-start md:gap-x-5 items-center w-full bg-white px-8 py-5 lg:py-6">
-        <h1>
+        <h1 className="lg:text-lg">
           <Link
             href={"/dashboard"}
-            className="flex items-center gap-x-1.5 lg:gap-x-2 font-medium lg:hover:text-neutral-500"
+            className="flex items-center gap-x-1.5 lg:gap-x-2.5 font-medium lg:hover:text-neutral-500"
           >
             <FiArrowLeft className="text-lg lg:text-xl" />
             <span>Dashboard</span>
@@ -60,10 +82,20 @@ export default function EventDetail({
               },
             }}
             as={`/events/edit`}
-            className="font-medium text-emerald-500 lg:hover:text-emerald-700 lg:hover:underline lg:text-lg"
+            className="text-emerald-500 lg:hover:text-emerald-700 lg:hover:underline lg:text-lg"
           >
             Edit
           </Link>
+        )}
+        {!isHost && (
+          <button
+            type="button"
+            onClick={leave}
+            className="font-medium text-red-500 lg:hover:text-red-400 lg:hover:underline lg:text-lg flex items-center gap-x-2.5"
+          >
+            <span>Leave the group</span>
+            <PiSignOutFill />
+          </button>
         )}
       </header>
       <>
@@ -224,6 +256,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 
   const user = (await getSession(ctx)) as unknown as User;
+
+  if (!user) {
+    return { redirect: { destination: "/login", permanent: false } };
+  }
 
   const eventsDocs = await db("events");
 

@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiCheck } from "react-icons/fi";
 import { twMerge } from "tailwind-merge";
 import { db } from "~/server/mongo";
 import { Event, EventProps, User } from "~/types";
@@ -102,8 +102,10 @@ export default function EventEdit({ user, event, _id }: Props) {
             onClick={reset}
             type="button"
             className={twMerge(
-              "font-medium text-red-500 lg:text-lg",
-              diff ? "lg:hover:text-red-400 lg:hover:underline" : "opacity-50"
+              "text-red-500 lg:text-lg",
+              diff
+                ? "lg:hover:text-red-400 lg:hover:underline font-medium"
+                : "opacity-50"
             )}
           >
             Reset
@@ -111,14 +113,20 @@ export default function EventEdit({ user, event, _id }: Props) {
           <button
             onClick={save}
             type="button"
-            className="font-medium text-emerald-500 lg:hover:text-emerald-700 lg:hover:underline lg:text-lg"
+            className={twMerge(
+              "lg:hover:underline lg:text-lg flex items-center gap-x-1.5",
+              diff
+                ? "text-emerald-700 font-medium "
+                : "text-emerald-500 lg:hover:text-emerald-700"
+            )}
           >
-            Save
+            <span>Save</span>
+            {diff && <FiCheck />}
           </button>
         </ul>
       </header>
       {status ? (
-        <div className="lg:grid-cols-12 flex flex-col justify-center items-center p-8 gap-y-2.5 lg:gap-y-4">
+        <div className="lg:col-span-12 flex flex-col justify-center items-center p-8 gap-y-2.5 lg:gap-y-4 mx-auto w-max">
           <article>
             <span className="w-[37.5px] h-[37.5px] rounded-full bg-gradient-to-r from-emerald-500 via-emerald-500 flex justify-center items-center animate-spin">
               <span className="w-[90%] h-[90%] bg-white rounded-full" />

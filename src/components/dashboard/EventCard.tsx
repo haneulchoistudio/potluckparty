@@ -48,9 +48,7 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <div onClick={openSetting ? () => setOpenSetting(false) : undefined}>
       <div className="flex justify-between items-center gap-x-3.5 lg:gap-x-5">
-        <h4 className="font-medium text-xl lg:text-2xl">
-          {name.length > 18 ? name.slice(0, 18) + ".." : name}
-        </h4>
+        <h4 className="font-medium text-xl lg:text-2xl truncate">{name}</h4>
         {amIHost && (
           <div className="relative">
             <button
@@ -92,9 +90,7 @@ const EventCard: React.FC<EventCardProps> = ({
       <div className="mb-2.5 lg:mb-3.5">
         <p className="flex items-center gap-x-1.5 text-neutral-600 text-sm lg:text-base">
           <FiMapPin />
-          <span>
-            {address.length > 30 ? address.slice(0, 30) + ".." : address}
-          </span>
+          <span className="inline-block truncate">{address}</span>
         </p>
       </div>
       <div>
